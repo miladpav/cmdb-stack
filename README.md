@@ -3,16 +3,15 @@
 Efficient way to use edited <a href="https://github.com/miladpav/ansible-cmdb" ><b><i>ansible-cmdb</i></b></a> from main source of <a href="https://github.com/fboender/ansible-cmdb" >Ferry Boender</a> 2017.
 
 - [What is this project](https://github.com/miladpav/cmdb-stack#What-is-this-project)
-- [How to Use](https://github.com/miladpav/cmdb-stack#How-to-use-and-Why)
+- [How to Use](https://github.com/miladpav/cmdb-stack#How-to-use-details)
 
 ## Architecture
 ![Architecture](pictures/architecture.jpg)
 
-### How to use and Why:
+### How to use details:
 To straight using of commands you can go for [commands.sh](commands.sh) file and follow actions.
 
 ##### Download Repo
-download latest release of this repo:
 ```download-steps
 wget https://github.com/miladpav/cmdb-stack/archive/refs/heads/master.zip
 unzip master.zip
@@ -20,7 +19,7 @@ cd cmdb-stack-master
 ```
 
 ##### Docker Requirements
-this stack needs docker host and docker-compose command to serve services:
+This stack needs docker host and docker-compose command to serve services:
 ```docker-steps
 docker network create --driver bridge --opt encrypted ansible-net
 docker-compose build
@@ -40,7 +39,7 @@ ssh-keygen -t rsa -b 4096 -f ./ssh-keys/root-id_rsa -N ''
 
 The next step is to install the tmway agent.
 
-the key of keep assets updated is to use tmway, this is an auto inventory generator for ansible, you can read about it on:
+The key of keep assets updated is to use tmway, this is an auto inventory generator for ansible, you can read about it on:
 [https://github.com/miladpav/Tell-Me-Who-Are-You](https://github.com/miladpav/Tell-Me-Who-Are-You)
 
 > ***__Notice:__*** I suggest to you add [agent.sh](playbooks/tmway-agent/files/agent.sh) end of your terraform provisioning or OVF Templates for virtual machines to keep your ansible inventory update without any handy actions.
@@ -60,7 +59,7 @@ docker exec ansible ansible-playbook -i /inventory/agent-hosts \
 ```
 
 ##### Gather Facts
-If prior playbook runs successfully, new inventory has been generated automatically in `inventory/hosts.ini` then we can gather data from this inventory
+If prior playbook runs successfully, new inventory has been generated automatically in `inventory/hosts.ini` based on [hostname-patterns](tmway_config/hostname_pattern.yml) then we can gather data from this inventory
 
 You can add this command to cron to keep update your data every day. example crontab-time: `0 02 * * *`
 ```gather-facts-steps
@@ -89,10 +88,6 @@ ansible-cmdb -d -C /template/custom-columns.conf \
 /facts/
 ```
 By using [template](template/custom-columns.conf) we can create more customized data and columns to our CMDB equals to custom facts gathered by ansible or other gathered facts not shown on the first page of cmdb.
-References:
-  - [mako-template](https://www.makotemplates.org/)
-  - [jsonxs](https://github.com/fboender/jsonxs) 
-
 
 ##### Result
 At the end of the compose file, we already mount cmdb HTML files into the Nginx container, Therefore we can see the final result on our web server.
@@ -106,3 +101,27 @@ So I prepared this repo to use easily and semi-auto to keep the server's informa
 
 One of the best features of this repo is we can add our needs data definitions everywhere of our work timeline using the powerful feature of [ansible-custom-facts](https://docs.ansible.com/ansible/latest/user_guide/playbooks_vars_facts.html#id8) and with [mako-template](https://www.makotemplates.org/) we can add our customized facts by ansible in cmdb.
 for detail of using [cmdb templates](template/custom-columns.conf) you can use [full documention](https://ansible-cmdb.readthedocs.io/en/latest/) of ansible-cmdb.
+
+- - -
+
+- [docker-compose overview](docker-compose.yml)
+
+- [How to Use](https://github.com/miladpav/cmdb-stack#How-to-use-details)
+
+- [Back to TOP](https://github.com/miladpav/cmdb-stack#ansible-cmdb-docker-compose)
+
+- - -
+
+### TODO
+- [ ] SQL database export on html
+- [ ] Split inventories by hostname pattern of [TMWAY](https://github.com/miladpav/Tell-Me-Who-Are-You)
+- [ ] Add extra agent data to send to inventory_generator
+
+#### WebSites
+- https://www.ansible.com/
+- https://ansible-cmdb.readthedocs.io/en/latest/
+- https://github.com/fboender/ansible-cmdb
+- https://github.com/fboender/jsonxs
+- https://www.makotemplates.org/
+- https://github.com/miladpav/Tell-Me-Who-Are-You
+- https://github.com/miladpav/ansible-cmdb
