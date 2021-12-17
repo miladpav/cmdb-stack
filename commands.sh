@@ -6,7 +6,7 @@
 
 ## docker network create --driver bridge --opt encrypted ansible-net
 ## docker-compose build
-## docker-compose up -d
+## docker-compose up -d --pull
 
 ## ssh-keygen -t rsa -b 4096 -f ssh-keys/root-id_rsa -N ''
 ## ssh-copy-id -i ssh-keys/root-id_rsa root@Servers
