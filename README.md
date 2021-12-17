@@ -2,7 +2,9 @@
 
 Efficient way for using <a href="https://github.com/fboender/ansible-cmdb" ><b><i>ansible-cmdb</i></b></a> by Ferry Boender 2017.
 
-## steps
+## Architecture
+![Architecture](architecture.jpg)
+<img >
 
 ### Usage:
 If you already have ansible provision you just need to use your private key and inventory to connect to servers for gathering facts.
