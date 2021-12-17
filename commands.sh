@@ -34,6 +34,6 @@ ansible-playbook -i /inventory/hosts.ini \
 ## create cmdb templates
 docker exec cmdb \
 ansible-cmdb -d -C /template/custom-columns.conf \
--t html_fancy_split -p local_js=0 \
+-i /inventory/hosts.ini -t html_fancy_split -p local_js=0 \
 --columns name,groups,main_ip,fqdn,all_ipv4,os,kernel,arch,virt,vcpus,cpu_type,ram,mem_usage,disk_usage,timestamp,prodname \
 /facts/

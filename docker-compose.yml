@@ -41,6 +41,7 @@ services:
     volumes:
       - $PWD/facts:/facts:ro
       - $PWD/overview:/overview
+      - $PWD/inventory:/inventory
       - $PWD/template:/template
     networks:
       - ansible-net
