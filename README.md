@@ -27,7 +27,7 @@ docker-compose up -d
 ```
 
 ##### Prepare ssh-key
-If you already have `ansible` infrastructure you can use your own private key and inventory. otherwise you should follow below steps.
+:warning:If you already have `ansible` infrastructure you can use your own private key and inventory and **skip** this section. otherwise you should follow below steps.
 ```ssh-key-steps
 ssh-keygen -t rsa -b 4096 -f ./ssh-keys/root-id_rsa -N ''
 #ssh-copy-id -i ./ssh-keys/root-id_rsa root@Servers
