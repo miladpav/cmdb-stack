@@ -1,8 +1,8 @@
 #!/bin/bash
 
-#wget https://github.com/miladpav/cmdb-stack/archive/refs/tags/v1.2.tar.gz
+
 wget https://github.com/miladpav/cmdb-stack/archive/refs/heads/master.zip
-unzip cmdb-stack-master.zip
+unzip master.zip
 cd cmdb-stack-master
 
 docker network create --driver bridge --opt encrypted ansible-net
