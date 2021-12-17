@@ -1,0 +1,4 @@
+overview/cmdb/*
+facts/*
+ssh-keys/*
+plays/*

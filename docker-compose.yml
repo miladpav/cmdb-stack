@@ -1,0 +1,60 @@
+version: "3.8"
+
+services:
+
+  tmway:
+    image: miladpav/inventory_generator:latest
+    container_name: tmway
+    hostname: tmway
+    environment:
+      - "HTTP_PORT=5050"
+    volumes:
+      - $PWD/inventory:/inventory
+      - $PWD/tmway_config:/config
+    ports:
+      - "5050:5050"
+    networks:
+      - ansible-net
+
+  ansible:
+    image: ansible:pip-4.9.0
+    container_name: ansible
+    hostname: ansible
+    tty: true
+    volumes:
+      - $PWD/playbooks:/plays
+      - $PWD/ssh-keys:/ssh-keys
+      - $PWD/facts:/facts
+      - $PWD/inventory:/inventory
+      - $PWD/ansible-config:/etc/ansible
+    networks:
+      - ansible-net
+
+  cmdb:
+    image: miladpav/ansible-cmdb:latest
+    container_name: cmdb
+    hostname: cmdb
+    tty: true
+    volumes:
+      - $PWD/facts:/facts:ro
+      - $PWD/overview:/overview
+      - $PWD/template:/template
+    networks:
+      - ansible-net
+
+  web-cmdb:
+    image: nginx:latest
+    container_name: web-cmdb
+    hostname: web-cmdb
+    ports:
+      - "8090:80"
+    volumes:
+      - $PWD/overview:/overview:ro
+      - $PWD/nginx-conf:/etc/nginx/conf.d
+    networks:
+      - ansible-net
+
+
+networks:
+  ansible-net:
+    external: true
