@@ -1,0 +1,34 @@
+---
+- name: install curl agent on hosts
+  hosts: agent
+  vars:
+    tmway_url: "http://{{ yourDomain }}:4040/tmway"
+    agent_path: "/home/scripts"
+
+  tasks:
+  - name: make sure to directory exists
+    file:
+      path: "{{ agent_path }}"
+      state: directory
+      recurse: yes
+
+  - name: copy agent.sh to servers
+    copy:
+      src: agent.sh
+      dest: "{{ agent_path }}/tmway_agent.sh"
+      mode: 0755
+
+  - name: first run after agent added
+    shell: "{{ agent_path }}/tmway_agent.sh {{ tmway_url }}"
+
+  - name: Creates a cron for agent under /etc/cron.d
+    cron:
+      name: tmway agent
+      minute: "0"
+      hour: "*/4"
+      day: "*"
+      weekday: "*"
+      month: "*"
+      user: root
+      job: "{{ agent_path }}/tmway_agent.sh {{ tmway_url }}"
+      cron_file: tmway_agent
