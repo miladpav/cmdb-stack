@@ -1,17 +1,18 @@
 version: "3.8"
 
 services:
+
   tmway:
     image: miladpav/inventory_generator:latest
     container_name: tmway
     hostname: tmway
     environment:
-      - "HTTP_PORT=5050"
+      - "HTTP_PORT=4040"
     volumes:
       - $PWD/inventory:/inventory
       - $PWD/tmway_config:/config
     ports:
-      - "5050:5050"
+      - "4040:4040"
     networks:
       - ansible-net
 
@@ -20,6 +21,9 @@ services:
     container_name: ansible
     hostname: ansible
     tty: true
+    build:
+      context: ./ansible-config
+      dockerfile: ansible.Dockerfile
     volumes:
       - $PWD/playbooks:/playbooks
       - $PWD/ssh-keys:/ssh-keys
@@ -33,9 +37,6 @@ services:
     image: miladpav/ansible-cmdb:latest
     container_name: cmdb
     hostname: cmdb
-    build:
-      context: ./ansible-config
-      dockerfile: ansible.Dockerfile
     tty: true
     volumes:
       - $PWD/facts:/facts:ro

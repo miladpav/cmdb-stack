@@ -10,10 +10,10 @@ docker-compose build
 docker-compose up -d
 
 ## if you have not ansible in your department yet, so you need add ssh-key to servers to ansible can connect them
-ssh-keygen -t rsa -b 4096 -f ssh-keys/root-id_rsa -N ''
-## ssh-copy-id -i ssh-keys/root-id_rsa root@Servers
+# ssh-keygen -t rsa -b 4096 -f ssh-keys/root-id_rsa -N ''
+# ssh-copy-id -i ssh-keys/root-id_rsa root@Servers
 ## add servers ip to agent-hosts inventory file with [agent] group
-## echo "servers_ip" >> /inventory/agent-hosts
+# echo "servers_ip" >> /inventory/agent-hosts
 
 ## insatll agent on servers
 #example: docker_server=192.168.40.135 and if you have domain you must change nginx-conf/frontend.conf
