@@ -1,17 +1,16 @@
-# <center>Ansible CMDB docker-compose</center>
+# Ansible CMDB docker-compose
 
-Efficient way for using <a href="https://github.com/fboender/ansible-cmdb" ><b><i>ansible-cmdb</i></b></a> by Ferry Boender 2017.
+Efficient way for using edited <a href="https://github.com/miladpav/ansible-cmdb" ><b><i>ansible-cmdb</i></b></a> from main source of <a href="https://github.com/fboender/ansible-cmdb" >Ferry Boender</a> 2017.
 
 ## Architecture
 ![Architecture](architecture.jpg)
-<img >
 
 ### Usage:
 If you already have ansible provision you just need to use your private key and inventory to connect to servers for gathering facts.
 
-You can use commands.sh structure, its simple.
+You can use [commands.sh](commands.sh) structure, its simple.
 
-download latest release of this repo and follow steps on commands.sh:
+download latest release of this repo and follow steps on [commands.sh](commands.sh):
 ```download-steps
 wget https://github.com/miladpav/cmdb-stack/archive/refs/heads/master.zip
 unzip master.zip
@@ -34,20 +33,28 @@ ssh-keygen -t rsa -b 4096 -f ./ssh-keys/root-id_rsa -N ''
 ```
 
 use ip address or domain name of docker host. example here: `docker-server=192.168.40.135`
-after you have access to servers from ansible container keep going with below commands:
+for next step we should install tmway agent
 
+tmway is a auto inventory generator for ansible you can read about it on:
+[https://github.com/miladpav/Tell-Me-Who-Are-You](https://github.com/miladpav/Tell-Me-Who-Are-You)
+
+
+You just need to run [agent_install.yml playbook](playbooks/tmway-agent/agent_install.yml) on your servers via ansible:
 ```install-agent-steps
 docker exec ansible ansible-playbook -i /inventory/agent-hosts \
 -e ansible_ssh_private_key_file=/ssh-keys/root-id_rsa -e yourDomain=192.168.40.135 \
 /playbooks/tmway-agent/agent_install.yml
 ```
+if latest playbook runs successfully, new inventory has been generated automatically in `inventory/hosts.ini` then we can gather data from this inventory
 
+you can add this command to cron to keep update data every day. example crontab-time: `0 02 * * *`
 ```gather-facts-steps
 docker exec ansible ansible-playbook -i /inventory/hosts.ini \
 -e ansible_ssh_private_key_file=/ssh-keys/root-id_rsa \
 /playbooks/gather-facts/gather-facts.yml
 ```
 
+you can add this command to cron to keep update htmls every day. example crontab-time:`0 03 * * *`
 ```create-cmdb-html-steps
 docker exec cmdb \
 ansible-cmdb -d -C /template/custom-columns.conf \
@@ -56,5 +63,5 @@ ansible-cmdb -d -C /template/custom-columns.conf \
 /facts/
 ```
 
-### what does do this project?
-Gathering infrastructure information are challenging specially on large scale assets. CMDB definition can help us to keep our information in centralized database or file 
+### What does this project do?
+Gathering infrastructure information are challenging specially on large scale assets. CMDB definition can help us to keep our information in centralized database or file updated. Thanks to Ferry Boender for amazing [ansible-cmdb](https://github.com/fboender/ansible-cmdb) repo we can use ansible for gather this information more effectively and combine with some actions to do it fully automatically. Ofcourse we have better solutions on cloud native infrastructure, but incase we cant access clouds or any similar infrastructure we can use this repo.
