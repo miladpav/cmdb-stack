@@ -1,5 +1,13 @@
 #!/bin/bash
 
+## download cmdb-stack.zip
+## unzip cmdb-stack.zip
+## cd cmdb-stack
+## mkdir ssh-keys
+## ssh-keygen -t rsa -b 4096 -f ssh-keys/root-id_rsa -N ''
+## ssh-copy-id -i ssh-keys/root-id_rsa root@Servers
+## 
+
 ## insatll agent on servers
 docker exec ansible \
 ansible-playbook -i /inventory/agent-hosts \
