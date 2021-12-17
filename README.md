@@ -19,7 +19,7 @@ cd cmdb-stack-master
 ```
 
 ##### Docker Requirements
-This stack needs docker host and docker-compose command to serve services:
+This stack needs `docker host` and `docker-compose` command to serve services:
 ```docker-steps
 docker network create --driver bridge --opt encrypted ansible-net
 docker-compose build
@@ -37,9 +37,9 @@ ssh-keygen -t rsa -b 4096 -f ./ssh-keys/root-id_rsa -N ''
 
 ##### Auto Inventory Generator
 
-The next step is to install the tmway agent.
+The next step is to install the `tmway agent`.
 
-The key of keep assets updated is to use tmway, this is an auto inventory generator for ansible, you can read about it on:
+The key of keep assets updated is to use tmway, this is an auto `inventory generator` for ansible, you can read about it on:
 [https://github.com/miladpav/Tell-Me-Who-Are-You](https://github.com/miladpav/Tell-Me-Who-Are-You)
 
 > ***__Notice:__*** I suggest to you add [agent.sh](playbooks/tmway-agent/files/agent.sh) end of your terraform provisioning or OVF Templates for virtual machines to keep your ansible inventory update without any handy actions.
@@ -90,7 +90,7 @@ ansible-cmdb -d -C /template/custom-columns.conf \
 By using [template](template/custom-columns.conf) we can create more customized data and columns to our CMDB equals to custom facts gathered by ansible or other gathered facts not shown on the first page of cmdb.
 
 ##### Result
-At the end of the compose file, we already mount cmdb HTML files into the Nginx container, Therefore we can see the final result on our web server.
+At the end of the compose file, we already mount cmdb HTML files into the Nginx container, Therefore we can see the final result on our webserver.
 
 ![Result](pictures/cmdb-output.jpg)
 
