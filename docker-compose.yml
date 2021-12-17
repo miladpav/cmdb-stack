@@ -1,7 +1,6 @@
 version: "3.8"
 
 services:
-
   tmway:
     image: miladpav/inventory_generator:latest
     container_name: tmway
@@ -22,7 +21,7 @@ services:
     hostname: ansible
     tty: true
     volumes:
-      - $PWD/playbooks:/plays
+      - $PWD/playbooks:/playbooks
       - $PWD/ssh-keys:/ssh-keys
       - $PWD/facts:/facts
       - $PWD/inventory:/inventory

@@ -1,23 +1,26 @@
 #!/bin/bash
 
-## download cmdb-stack.zip
-## unzip cmdb-stack.zip
-## cd cmdb-stack
+#wget https://github.com/miladpav/cmdb-stack/archive/refs/tags/v1.2.tar.gz
+wget https://github.com/miladpav/cmdb-stack/archive/refs/heads/master.zip
+unzip cmdb-stack-master.zip
+cd cmdb-stack-master
 
-## docker network create --driver bridge --opt encrypted ansible-net
-## docker-compose build
-## docker-compose up -d --pull
+docker network create --driver bridge --opt encrypted ansible-net
+docker-compose build
+docker-compose up -d
 
-## ssh-keygen -t rsa -b 4096 -f ssh-keys/root-id_rsa -N ''
+## if you have not ansible in your department yet, so you need add ssh-key to servers to ansible can connect them
+ssh-keygen -t rsa -b 4096 -f ssh-keys/root-id_rsa -N ''
 ## ssh-copy-id -i ssh-keys/root-id_rsa root@Servers
 ## add servers ip to agent-hosts inventory file with [agent] group
-## echo "192.168.40.134" >> /inventory/agent-hosts
+## echo "servers_ip" >> /inventory/agent-hosts
 
 ## insatll agent on servers
+#example: docker_server=192.168.40.135 and if you have domain you must change nginx-conf/frontend.conf
 docker exec ansible \
 ansible-playbook -i /inventory/agent-hosts \
 -e ansible_ssh_private_key_file=/ssh-keys/root-id_rsa \
--e yourDomain=192.168.40.135 \ #example: docker_server=192.168.40.135 and if you have domain you must change nginx-conf/frontend.conf
+-e yourDomain=192.168.40.135 \
 /playbooks/tmway-agent/agent_install.yml
 
 ## now your auto inventory has been created !
