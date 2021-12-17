@@ -1,0 +1,28 @@
+---
+- hosts: all
+  gather_facts: false
+  vars:
+    - ansible_fact_dir: "/facts"
+
+  tasks:
+    ### uncomment if you added custom facts script in files directory beside your playbook
+    # - name: create custom facts directory
+    #   file:
+    #     path: /etc/ansible/fact.d
+    #     state: directory
+    #     recurse: yes
+
+    # - name: add custom facts to servers
+    #   copy:
+    #     src: "{{ item }}"
+    #     dest: /etc/ansible/fact.d/
+    #     mode: 0755
+    #   with_fileglob:
+    #     - *.fact
+
+    - name: run setup
+      setup:
+      register: cmdbinfo
+
+    - name: create fact file
+      local_action: copy content={{ cmdbinfo }} dest={{ ansible_fact_dir }}/{{ ansible_hostname }}
