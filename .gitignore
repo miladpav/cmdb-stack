@@ -1,3 +1,5 @@
-overview/cmdb/*
+!overview/cmdb/images/*
+!overview/cmdb/js/*
+overview/cmdb/*.html
 facts/*
 ssh-keys/*
