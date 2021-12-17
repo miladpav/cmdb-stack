@@ -100,11 +100,11 @@ Gathering infrastructure information is challenging especially on large-scale as
 So I prepared this repo to use easily and semi-auto to keep the server's information updated. little edits on the main project of ansible-cmdb and writing the tmway flask app are some of my actions to able use the ansible-cmdb feature more efficient.
 
 One of the best features of this repo is we can add our needs data definitions everywhere of our work timeline using the powerful feature of [ansible-custom-facts](https://docs.ansible.com/ansible/latest/user_guide/playbooks_vars_facts.html#id8) and with [mako-template](https://www.makotemplates.org/) we can add our customized facts by ansible in cmdb.
-for detail of using [cmdb templates](template/custom-columns.conf) you can use [full documention](https://ansible-cmdb.readthedocs.io/en/latest/) of ansible-cmdb.
+for detail of using [cmdb templates](template/custom-columns.conf) you can use [Custom Columns](https://ansible-cmdb.readthedocs.io/en/latest/usage/#custom-columns) of ansible-cmdb.
 
 - - -
 
-- [docker-compose overview](docker-compose.yml)
+- [Docker-Compose Overview](docker-compose.yml)
 
 - [How to Use](https://github.com/miladpav/cmdb-stack#How-to-use-details)
 
@@ -113,6 +113,7 @@ for detail of using [cmdb templates](template/custom-columns.conf) you can use [
 - - -
 
 ### TODO
+- [ ] Add extra information in document
 - [ ] SQL database export on html
 - [ ] Split inventories by hostname pattern of [TMWAY](https://github.com/miladpav/Tell-Me-Who-Are-You)
 - [ ] Add extra agent data to send to inventory_generator
