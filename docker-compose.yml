@@ -34,6 +34,9 @@ services:
     image: miladpav/ansible-cmdb:latest
     container_name: cmdb
     hostname: cmdb
+    build:
+      context: ./ansible-config
+      dockerfile: ansible.Dockerfile
     tty: true
     volumes:
       - $PWD/facts:/facts:ro

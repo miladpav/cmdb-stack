@@ -3,16 +3,22 @@
 ## download cmdb-stack.zip
 ## unzip cmdb-stack.zip
 ## cd cmdb-stack
+
+## docker network create --driver bridge --opt encrypted ansible-net
+## docker-compose build
+## docker-compose up -d
+
 ## mkdir ssh-keys
 ## ssh-keygen -t rsa -b 4096 -f ssh-keys/root-id_rsa -N ''
 ## ssh-copy-id -i ssh-keys/root-id_rsa root@Servers
-## 
+## add servers ip to agent-hosts inventory file with [agent] group
 
 ## insatll agent on servers
 docker exec ansible \
 ansible-playbook -i /inventory/agent-hosts \
 -e ansible_ssh_private_key_file=/ssh-keys/root-id_rsa \
-/playbooks/tmway_agent/agent_install.yml
+-e yourDomain=192.168.40.135 \
+/playbooks/tmway-agent/agent_install.yml
 
 ## gather facts from servers
 docker exec ansible \
