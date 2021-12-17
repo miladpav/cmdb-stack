@@ -2,15 +2,15 @@
 
 ## insatll agent on servers
 docker exec ansible \
-ansible-playbook -i /plays/tmway_agent/hosts \
+ansible-playbook -i /inventory/agent-hosts \
 -e ansible_ssh_private_key_file=/ssh-keys/root-id_rsa \
-/plays/tmway_agent/agent_install.yml
+/playbooks/tmway_agent/agent_install.yml
 
 ## gather facts from servers
 docker exec ansible \
-ansible -i /inventory/hosts.ini all \
+ansible-playbook -i /inventory/hosts.ini \
 -e ansible_ssh_private_key_file=/ssh-keys/root-id_rsa \
--m setup --tree /facts
+/plays/gather-facts/gather-facts.yml
 
 ## create cmdb templates
 docker exec cmdb \
