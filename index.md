@@ -6,7 +6,8 @@ Efficient way to use edited <a href="https://github.com/miladpav/ansible-cmdb" >
 - [How to Use](https://github.com/miladpav/cmdb-stack#How-to-use-details)
 
 ## Architecture
-![Architecture](https://github.com/miladpav/cmdb-stack/blob/master/pictures/architecture.jpg)
+<!-- ![Architecture](https://github.com/miladpav/cmdb-stack/blob/master/pictures/architecture.jpg) -->
+<img src="https://github.com/miladpav/cmdb-stack/blob/master/pictures/architecture.jpg">
 
 ### How to use details:
 To straight using of commands you can go for [commands.sh](commands.sh) file and follow actions.
