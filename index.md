@@ -6,7 +6,7 @@ Efficient way to use edited <a href="https://github.com/miladpav/ansible-cmdb" >
 - [How to Use](https://github.com/miladpav/cmdb-stack#How-to-use-details)
 
 ## Architecture
-![Architecture](pictures/architecture.jpg)
+![Architecture](https://github.com/miladpav/cmdb-stack/blob/master/pictures/architecture.jpg)
 
 ### How to use details:
 To straight using of commands you can go for [commands.sh](commands.sh) file and follow actions.
@@ -92,7 +92,7 @@ By using [template](template/custom-columns.conf) we can create more customized 
 ##### Result
 At the end of the compose file, we already mount cmdb HTML files into the Nginx container, Therefore we can see the final result on our webserver.
 
-![Result](pictures/cmdb-output.jpg)
+![Result](https://github.com/miladpav/cmdb-stack/blob/master/pictures/cmdb-output.jpg)
 
 ### What is this project?
 Gathering infrastructure information is challenging especially on large-scale assets. CMDB definition can help us to keep our information in a centralized database or file updated. Thanks to Ferry Boender for the amazing [ansible-cmdb](https://github.com/fboender/ansible-cmdb) repo we can use ansible to gather servers information more effectively and combine it with some actions to do it fully automatically. Of course, we have better solutions on cloud-native infrastructure, but in case we cannot access clouds or any similar infrastructure we can use this repo.
